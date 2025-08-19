@@ -86,11 +86,13 @@ def plot_anomaly_reconstruction_loss(normal_data, abnormal_data, model, threshol
     plt.axhline(y=threshold, color='green', linestyle='--', label='Threshold')
     
     # Customize the plot
-    plt.xlabel('Sequence Index', fontsize=10)
-    plt.ylabel('Reconstruction Loss (MAE)', fontsize=10)
+    plt.xlabel('Sequence Index', fontsize=14)
+    plt.ylabel('Reconstruction Loss (MAE)', fontsize=14)
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
     plt.ylim(0, y_limit)
     plt.grid(True, alpha=0.3)
-    plt.legend(['Reconstruction Loss', 'Anomalies', 'Threshold'])
+    plt.legend(['Reconstruction Loss', 'Anomalies', 'Threshold'], fontsize=14)
     
     plt.show()
     
@@ -115,14 +117,14 @@ def plot_confusion_matrix(y_true, y_pred):
                            confusion_mat.sum(axis=1)[:, np.newaxis] * 100)
     
     plt.imshow(confusion_mat, cmap=plt.cm.Blues)
-    plt.colorbar()
+    #plt.colorbar()
     
     # Add labels with binary classes
-    labels = ['0', '1']
-    plt.xticks([0, 1], labels)
-    plt.yticks([0, 1], labels)
-    plt.ylabel('True Label')
-    plt.xlabel('Predicted Label')
+    labels = ['Normal', 'Abnormal']
+    plt.xticks([0, 1], labels,fontsize=14)
+    plt.yticks([0, 1], labels,fontsize=14)
+    plt.ylabel('True Label',fontsize=14)
+    plt.xlabel('Predicted Label',fontsize=14)
     
     # Add numbers to cells
     threshold = confusion_mat.max() / 2.
@@ -132,6 +134,7 @@ def plot_confusion_matrix(y_true, y_pred):
         for j in range(2):
             plt.text(j, i, f'{confusion_mat_percent[i, j]:.1f}%',
                     ha="center", va="center",
+                    fontsize=14,
                     color="white" if i==0 and j==0 else "black")
     
     plt.show()
@@ -197,10 +200,13 @@ def plt_optimal_threshold(normal_losses, abnormal_losses):
     plt.plot(best_threshold, best_f1, 'r*', markersize=15, 
              label=f'Best F1: {best_f1:.3f} at {best_threshold:.3f}')
     
-    plt.xlabel('Threshold Value (Reconstruction Error MAE)')
-    plt.ylabel('Score')
+    plt.xlabel('Threshold Value (Reconstruction Error MAE)', fontsize=14)
+    plt.ylabel('Score', fontsize=14)
+    # Optional: Also increase tick label size
+    plt.xticks(fontsize=12)
+    plt.yticks(fontsize=12)
     plt.grid(True, alpha=0.3)
-    plt.legend()
+    plt.legend(fontsize=12)  # Also increase legend font size
     plt.tight_layout()
     plt.show()
     
